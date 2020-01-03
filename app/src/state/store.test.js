@@ -1,10 +1,11 @@
 /* global test, expect, beforeEach */
 
-import Store from './store'
+// import Store from './store'
 
 // @TODO move to a different file
 
 /**
+ * Initial fetch
  * Success case
  * Fail case
  * Test different parts of the final state
@@ -16,6 +17,7 @@ beforeEach(() => {
 })
 
 test('the trigger sets state to loading and then done', (done) => {
+  expect(true).toBeTruthy()
   /*
     const getter = dispatch(getData)
     let state = getState()

@@ -3,16 +3,30 @@ import {
   createAsyncReducer
 } from 'resynchronize'
 
-export const setList = createAsyncActions('REQUEST-LIST')
+import trafficMeister from '../../service'
 
-export const getRequestList = (dispatch) => {
+export const setList = createAsyncActions('SET-LIST')
+
+const fetchData = () => new Promise((resolve, reject) => {
   try {
-    dispatch(setList.START())
-
-    dispatch(setList.DONE())
+    trafficMeister.fetchData((err, data) => {
+      if (err) {
+        console.warn(err)
+        reject(err)
+      } else {
+        resolve(data)
+      }
+    })
   } catch (ex) {
-    dispatch(setList.ERROR())
+    reject(ex)
   }
+})
+
+export const getList = (fetcher = fetchData) => (dispatch) => {
+  dispatch(setList.START())
+  return fetcher()
+    .then(data => dispatch(setList.DONE(data)))
+    .catch(ex => dispatch(setList.ERROR(ex)))
 }
 
 export default createAsyncReducer(setList)
