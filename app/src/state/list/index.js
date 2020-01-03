@@ -3,6 +3,16 @@ import {
   createAsyncReducer
 } from 'resynchronize'
 
-export const requestList = createAsyncActions('REQUEST-LIST')
+export const setList = createAsyncActions('REQUEST-LIST')
 
-export default createAsyncReducer(requestList)
+export const getRequestList = (dispatch) => {
+  try {
+    dispatch(setList.START())
+
+    dispatch(setList.DONE())
+  } catch (ex) {
+    dispatch(setList.ERROR())
+  }
+}
+
+export default createAsyncReducer(setList)

@@ -1,6 +1,6 @@
 var trafficMeister;
 
-(function() {
+(function () {
   var data = [
     {
       id: 1,
@@ -86,26 +86,26 @@ var trafficMeister;
       colors: ['green', 'yellow'],
       img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Porsche_Carrera_GT_-_Goodwood_Breakfast_Club_%28July_2008%29.jpg/440px-Porsche_Carrera_GT_-_Goodwood_Breakfast_Club_%28July_2008%29.jpg'
     }
-  ];
+  ]
 
   trafficMeister = {
     fetchData: fetchData
-  };
+  }
 
-  function fetchData(cb) {
+  function fetchData (cb) {
     if (!cb) {
-      throw 'Callback not defined';
+      throw new Error('Callback not defined')
     }
-    setTimeout(function() {
+    setTimeout(function () {
       if (Math.floor(Math.random() * 20) === 2) {
-        cb('Fetch data error')
+        cb(new Error('Fetch data error'))
       } else {
-        cb(null, data);
+        cb(null, data)
       }
-    }, 1000);
+    }, 1000)
   }
 
   if (typeof module !== 'undefined') {
-    module.exports = trafficMeister;
+    module.exports = trafficMeister
   }
-})();
+})()
