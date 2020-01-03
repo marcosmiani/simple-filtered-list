@@ -89,7 +89,8 @@ var trafficMeister;
   ]
 
   trafficMeister = {
-    fetchData: fetchData
+    fetchData: fetchData,
+    data
   }
 
   function fetchData (cb) {

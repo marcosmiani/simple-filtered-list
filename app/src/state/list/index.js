@@ -12,13 +12,13 @@ const fetchData = () => new Promise((resolve, reject) => {
     trafficMeister.fetchData((err, data) => {
       if (err) {
         console.warn(err)
-        reject(err)
+        reject(err.message)
       } else {
         resolve(data)
       }
     })
   } catch (ex) {
-    reject(ex)
+    reject(ex.message)
   }
 })
 
@@ -29,4 +29,7 @@ export const getList = (fetcher = fetchData) => (dispatch) => {
     .catch(ex => dispatch(setList.ERROR(ex)))
 }
 
-export default createAsyncReducer(setList)
+export default createAsyncReducer(
+  setList,
+  { reset: () => null }
+)

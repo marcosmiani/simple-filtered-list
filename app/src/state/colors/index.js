@@ -6,6 +6,8 @@ const setSelected = createAction('SET-TYPE')
 const selected = createReducer(
   null,
   {
+    [setList.RESET]: () => null,
+    [setList.DONE]: () => null,
     [setSelected]: (state, payload) => {
       return payload
     }
@@ -13,8 +15,9 @@ const selected = createReducer(
 )
 
 const list = createReducer(
-  null,
+  [],
   {
+    [setList.RESET]: () => [],
     [setList.DONE]: (state, { payload }) => {
       // use transducers to filter repeated and map, puts the items to disabled o enabled but shows them all
       // This allows the user to see the full available options even when the selection filters some, giving a clue on how it works
