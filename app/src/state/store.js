@@ -3,16 +3,16 @@ import {
   combineReducers
 } from '@reduxjs/toolkit'
 
-import brands from './brands'
-import colors from './colors'
-import types from './types'
+import brand from './brand'
+import color from './color'
+import typeReducer from './type'
 import list from './list'
 
 const store = configureStore({
   reducer: combineReducers({
-    brands,
-    colors,
-    types,
+    brand,
+    color,
+    type: typeReducer,
     list
   })
 })
