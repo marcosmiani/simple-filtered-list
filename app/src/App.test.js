@@ -4,10 +4,12 @@ import React from 'react'
 import { render, cleanup } from './test-utils'
 import App from './App'
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />)
-  const linkElement = getByText(/learn react/i)
-  expect(linkElement).toBeInTheDocument()
+test('renders learn react link', async () => {
+  const { queryAllByRole } = render(<App />)
+
+  // Header
+  const header = await queryAllByRole(/heading/gi)
+  expect(header).toBeTruthy()
 
   cleanup()
 })

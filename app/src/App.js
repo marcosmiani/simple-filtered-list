@@ -1,8 +1,23 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 import { getList } from './state/list'
-import logo from './logo.svg'
-import './App.css'
+
+const Main = styled.div`
+  text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+
+  & > header {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+`
 
 function App ({ dispatch }) {
   useEffect(() => {
@@ -10,22 +25,11 @@ function App ({ dispatch }) {
   })
 
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          Learn React
-        </a>
+    <Main className='App'>
+      <header role='heading'>
+        The Traffic Meister
       </header>
-    </div>
+    </Main>
   )
 }
 
