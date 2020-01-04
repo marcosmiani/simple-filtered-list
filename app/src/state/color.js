@@ -12,6 +12,10 @@ const selected = createReducer(
   }
 )
 
+/**
+ * Selector to return the color list from a filtered list ignoring the color parameter
+ * @param {Object} state application state
+ */
 export const getColors = (state) => {
   const list = filterList(state, { color: true })
   const colors = new Set()

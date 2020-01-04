@@ -8,6 +8,9 @@ import trafficMeister from '../service'
 
 export const setList = createAsyncActions('SET-LIST')
 
+/**
+ * Default Fetcher, returns the service data
+ */
 const fetchData = () => new Promise((resolve, reject) => {
   try {
     trafficMeister.fetchData((err, data) => {
@@ -23,6 +26,10 @@ const fetchData = () => new Promise((resolve, reject) => {
   }
 })
 
+/**
+ * Main thunk to set the main list
+ * @param {Function} fetcher Fetcher function: it should return a promise when called
+ */
 export const getList = (fetcher = fetchData) => (dispatch) => {
   dispatch(setList.START())
   return fetcher()

@@ -12,6 +12,10 @@ const selected = createReducer(
   }
 )
 
+/**
+ * Selector to return the brand list from a filtered list ignoring the brand parameter
+ * @param {Object} state application state
+ */
 export const getBrands = (state) => {
   const list = filterList(state, { brand: true })
   const brands = new Set()

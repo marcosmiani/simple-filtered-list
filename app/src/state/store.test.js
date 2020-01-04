@@ -118,7 +118,7 @@ describe('When selections is made on', () => {
       expect(getColors(state)).toHaveLength(5)
       expect(getTypes(state)).toHaveLength(3)
     })
-    test('no values if the type doesnt exists, except the type list', () => {
+    test('no values if the type doesnt exists, except the type list (edge case with bad js usage)', () => {
       Store.dispatch(setSelectedType('spaceship'))
       const state = Store.getState()
       expect(state.type).toBe('spaceship')
@@ -141,7 +141,7 @@ describe('When selections is made on', () => {
       expect(getColors(state)).toHaveLength(8)
       expect(getTypes(state)).toHaveLength(3)
     })
-    test('no values if the color doesnt exists, except the colors list', () => {
+    test('no values if the color doesnt exists, except the colors list (edge case with bad js usage)', () => {
       Store.dispatch(setSelectedColor('lavender'))
       const state = Store.getState()
       expect(state.color).toBe('lavender')
@@ -166,7 +166,7 @@ describe('When selections is made on', () => {
       expect(getTypes(state)).toHaveLength(1)
     })
 
-    test('no values if the brand doesnt exists, except the brands list', () => {
+    test('no values if the brand doesnt exists, except the brands list (edge case with bad js usage)', () => {
       Store.dispatch(setSelectedBrand('Renault Veyron'))
       const state = Store.getState()
       expect(state.brand).toBe('Renault Veyron')
@@ -182,29 +182,29 @@ describe('When selections is made on', () => {
   describe('different lists the values changes and the list is filtered to', () => {
     test('some values if the combination values exists', () => {
       Store.dispatch(setSelectedType('car'))
-      Store.dispatch(setSelectedColor('white'))
+      Store.dispatch(setSelectedColor('black'))
       const state = Store.getState()
-      expect(state.color).toBe('white')
+      expect(state.color).toBe('black')
       expect(state.type).toBe('car')
       // the list is filtered
-      expect(filterList(state)).toHaveLength(1)
-      expect(getBrands(state)).toHaveLength(1)
+      expect(filterList(state)).toHaveLength(2)
+      expect(getBrands(state)).toHaveLength(2)
       expect(getColors(state)).toHaveLength(5)
       expect(getTypes(state)).toHaveLength(3)
     })
 
-    test('no values if the combination of values doesnt exists, except the list that posses values wihtout filtering itself', () => {
+    test('one value, except the color that because every item posses at least two', () => {
       Store.dispatch(setSelectedBrand('Porsche Carrera GT'))
-      Store.dispatch(setSelectedColor('gray'))
+      Store.dispatch(setSelectedColor('green'))
       Store.dispatch(setSelectedType('car'))
       const state = Store.getState()
-      expect(state.color).toBe('gray')
+      expect(state.color).toBe('green')
       expect(state.type).toBe('car')
       // the list is filtered
-      expect(filterList(state)).toHaveLength(0)
-      expect(getBrands(state)).toHaveLength(0)
-      expect(getColors(state)).toHaveLength(2) // There is still a car with colors
-      expect(getTypes(state)).toHaveLength(0)
+      expect(filterList(state)).toHaveLength(1)
+      expect(getBrands(state)).toHaveLength(1)
+      expect(getColors(state)).toHaveLength(2)
+      expect(getTypes(state)).toHaveLength(1)
     })
 
     test('no values if the combination of values doesnt exists', () => {
@@ -217,7 +217,7 @@ describe('When selections is made on', () => {
       // the list is filtered
       expect(filterList(state)).toHaveLength(0)
       expect(getBrands(state)).toHaveLength(0)
-      expect(getColors(state)).toHaveLength(0) // Cars still have colors
+      expect(getColors(state)).toHaveLength(0)
       expect(getTypes(state)).toHaveLength(0)
     })
   })
