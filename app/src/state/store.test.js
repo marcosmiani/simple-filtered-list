@@ -207,7 +207,7 @@ describe('When selections is made on', () => {
       expect(getTypes(state)).toHaveLength(1)
     })
 
-    test('no values if the combination of values doesnt exists', () => {
+    test('no values if the combination of values doesnt exists (edge scenario)', () => {
       Store.dispatch(setSelectedBrand('Amer 4-4-0'))
       Store.dispatch(setSelectedColor('gray'))
       Store.dispatch(setSelectedType('car'))
