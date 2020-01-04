@@ -2,6 +2,8 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { getList } from './state/list'
+import List from './components/List'
+import Filters from './components/Filters'
 
 const Main = styled.div`
   text-align: center;
@@ -9,7 +11,7 @@ const Main = styled.div`
   min-height: 100vh;
 
   & > header {
-    height: 100vh;
+    height: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,7 +30,9 @@ function App ({ dispatch }) {
     <Main className='App'>
       <header role='heading'>
         The Traffic Meister
+        <Filters />
       </header>
+      <List />
     </Main>
   )
 }

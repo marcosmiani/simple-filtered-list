@@ -1,5 +1,5 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
-import { setList, filterList } from './list'
+import { setList, getFilteredList } from './list'
 
 export const setSelected = createAction('SET-TYPE')
 
@@ -17,7 +17,7 @@ const selected = createReducer(
  * @param {Object} state application state
  */
 export const getTypes = (state) => {
-  const list = filterList(state, { type: true })
+  const list = getFilteredList(state, { type: true })
   const types = new Set()
   list.forEach(element => {
     types.add(element.type)

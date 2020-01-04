@@ -44,7 +44,7 @@ export const getList = (fetcher = fetchData) => (dispatch) => {
  * @param {Object} state application state
  * @param {Object} skipOptions config object to skip filtering by one of the properties
  */
-export const filterList = (state, skipOptions = {}) => {
+export const getFilteredList = (state, skipOptions = {}) => {
   const list = getPayload(state.list) || []
 
   return list.filter(element =>
@@ -54,7 +54,4 @@ export const filterList = (state, skipOptions = {}) => {
   )
 }
 
-export default createAsyncReducer(
-  setList,
-  { reset: () => null }
-)
+export default createAsyncReducer(setList, { reset: () => null })

@@ -8,7 +8,7 @@ import {
 
 import { data } from '../service'
 import Store from './store'
-import { getList, setList, filterList } from './list'
+import { getList, setList, getFilteredList } from './list'
 import { setSelected as setSelectedBrand, getBrands } from './brand'
 import { setSelected as setSelectedColor, getColors } from './color'
 import { setSelected as setSelectedType, getTypes } from './type'
@@ -113,7 +113,7 @@ describe('When selections is made on', () => {
       const state = Store.getState()
       expect(state.type).toBe('car')
       // the lists are filtered
-      expect(filterList(state)).toHaveLength(4)
+      expect(getFilteredList(state)).toHaveLength(4)
       expect(getBrands(state)).toHaveLength(4)
       expect(getColors(state)).toHaveLength(5)
       expect(getTypes(state)).toHaveLength(3)
@@ -123,7 +123,7 @@ describe('When selections is made on', () => {
       const state = Store.getState()
       expect(state.type).toBe('spaceship')
       // the lists are filtered
-      expect(filterList(state)).toHaveLength(0)
+      expect(getFilteredList(state)).toHaveLength(0)
       expect(getBrands(state)).toHaveLength(0)
       expect(getColors(state)).toHaveLength(0)
       expect(getTypes(state)).toHaveLength(3)
@@ -136,7 +136,7 @@ describe('When selections is made on', () => {
       const state = Store.getState()
       expect(state.color).toBe('white')
       // the list is filtered
-      expect(filterList(state)).toHaveLength(6)
+      expect(getFilteredList(state)).toHaveLength(6)
       expect(getBrands(state)).toHaveLength(6)
       expect(getColors(state)).toHaveLength(8)
       expect(getTypes(state)).toHaveLength(3)
@@ -146,7 +146,7 @@ describe('When selections is made on', () => {
       const state = Store.getState()
       expect(state.color).toBe('lavender')
       // the list is filtered
-      expect(filterList(state)).toHaveLength(0)
+      expect(getFilteredList(state)).toHaveLength(0)
       expect(getBrands(state)).toHaveLength(0)
       expect(getColors(state)).toHaveLength(8)
       expect(getTypes(state)).toHaveLength(0)
@@ -160,7 +160,7 @@ describe('When selections is made on', () => {
       expect(state.brand).toBe('Bugatti Veyron')
 
       // the list is filtered
-      expect(filterList(state)).toHaveLength(1)
+      expect(getFilteredList(state)).toHaveLength(1)
       expect(getBrands(state)).toHaveLength(12)
       expect(getColors(state)).toHaveLength(2)
       expect(getTypes(state)).toHaveLength(1)
@@ -172,7 +172,7 @@ describe('When selections is made on', () => {
       expect(state.brand).toBe('Renault Veyron')
 
       // the list is filtered
-      expect(filterList(state)).toHaveLength(0)
+      expect(getFilteredList(state)).toHaveLength(0)
       expect(getBrands(state)).toHaveLength(12)
       expect(getColors(state)).toHaveLength(0)
       expect(getTypes(state)).toHaveLength(0)
@@ -187,7 +187,7 @@ describe('When selections is made on', () => {
       expect(state.color).toBe('black')
       expect(state.type).toBe('car')
       // the list is filtered
-      expect(filterList(state)).toHaveLength(2)
+      expect(getFilteredList(state)).toHaveLength(2)
       expect(getBrands(state)).toHaveLength(2)
       expect(getColors(state)).toHaveLength(5)
       expect(getTypes(state)).toHaveLength(3)
@@ -201,7 +201,7 @@ describe('When selections is made on', () => {
       expect(state.color).toBe('green')
       expect(state.type).toBe('car')
       // the list is filtered
-      expect(filterList(state)).toHaveLength(1)
+      expect(getFilteredList(state)).toHaveLength(1)
       expect(getBrands(state)).toHaveLength(1)
       expect(getColors(state)).toHaveLength(2)
       expect(getTypes(state)).toHaveLength(1)
@@ -215,7 +215,7 @@ describe('When selections is made on', () => {
       expect(state.color).toBe('gray')
       expect(state.type).toBe('car')
       // the list is filtered
-      expect(filterList(state)).toHaveLength(0)
+      expect(getFilteredList(state)).toHaveLength(0)
       expect(getBrands(state)).toHaveLength(0)
       expect(getColors(state)).toHaveLength(0)
       expect(getTypes(state)).toHaveLength(0)

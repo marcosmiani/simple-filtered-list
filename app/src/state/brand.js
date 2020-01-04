@@ -1,5 +1,5 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
-import { setList, filterList } from './list'
+import { setList, getFilteredList } from './list'
 
 export const setSelected = createAction('SET-BRAND')
 
@@ -17,7 +17,7 @@ const selected = createReducer(
  * @param {Object} state application state
  */
 export const getBrands = (state) => {
-  const list = filterList(state, { brand: true })
+  const list = getFilteredList(state, { brand: true })
   const brands = new Set()
   list.forEach(element => {
     brands.add(element.brand)

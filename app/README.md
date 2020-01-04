@@ -33,7 +33,15 @@ lints the app code.<br />
 
 ## Folder structure
 
-The main folder contains the *app*, the *service worker* configuration, the test set up file, utils and the `service` and `state` folders
+The main folder contains:
+- *app* main file
+- *service worker* configuration
+- Tests set up file and utils,
+- `components`, `service` and `state` folders
+
+### Components
+
+Collection of components used on the app to visualize the data
 
 ### Service
 
