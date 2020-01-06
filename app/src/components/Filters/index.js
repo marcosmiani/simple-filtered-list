@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { getTypes, setSelected as setSelectedType } from '../../state/type'
 import { getColors, setSelected as setSelectedColor } from '../../state/color'
 import { getBrands, setSelected as setSelectedBrand } from '../../state/brand'
+import { clearSelected } from '../../state/store'
 
 import { Select as AntdSelect, Button as AntButton } from 'antd'
 
@@ -34,7 +35,7 @@ const Label = styled.label`
 `
 
 const Button = styled(AntButton)`
-  margin-top: 8px;
+  margin-top: 16px;
   text-transform: uppercase;
 `
 
@@ -98,18 +99,18 @@ const TypeSelect = typeConnector(BasicSelect)
 const ColorSelect = colorConnector(BasicSelect)
 const BrandSelect = brandConnector(BasicSelect)
 
-const Filters = () => {
+const Filters = ({ dispatch }) => {
   return (
     <Wrapper>
       <TypeSelect />
       <ColorSelect />
       <BrandSelect />
 
-      <Button type='primary' icon='delete'>
+      <Button size='large' type='primary' icon='delete' onClick={() => dispatch(clearSelected())}>
         Clear all
       </Button>
     </Wrapper>
   )
 }
 
-export default Filters
+export default connect()(Filters)
