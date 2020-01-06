@@ -38,7 +38,22 @@ const Brand = styled.div`
   right: 16px;
 `
 
-export const Item = ({ id, img, brand }) => {
+const Colors = styled.div`
+  background-color: white;
+  display: inline-flex;
+  flex-direction: row;
+`
+
+const Color = styled.div`
+  width: 10px;
+  height: 10px;
+  background-color: ${({ color }) => color};
+  border-radius: 5px;
+  margin: 4px;
+  border: 1px ${({ color }) => color === 'white' ? 'black' : color} solid;
+`
+
+export const Item = ({ id, img, brand, colors }) => {
   const [image, setImage] = useState(true)
   return (
     <ItemWrapper>
@@ -56,6 +71,11 @@ export const Item = ({ id, img, brand }) => {
       )}
       <Brand>
         {brand}
+        <Colors>
+          {colors.map(color => (
+            <Color key={color} color={color} />
+          ))}
+        </Colors>
       </Brand>
     </ItemWrapper>
   )
