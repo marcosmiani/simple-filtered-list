@@ -47,7 +47,7 @@ export const List = ({ items = [], listStatus, dispatch, ...props }) => {
       )}
       {loading && (
         <EventWrapper>
-          <Icon type='loading' />
+          <Icon type='loading' style={{ fontSize: '40px' }} />
         </EventWrapper>
       )}
     </ListWrapper>

@@ -15,7 +15,7 @@ const Drawer = styled(AntDrawer)`
   }
 
   & .ant-drawer-body {
-    padding: 8px;
+    padding: 16px;
   }
 `
 

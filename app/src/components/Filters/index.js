@@ -3,18 +3,18 @@ import { connect } from 'react-redux'
 import { isLoading } from 'resynchronize'
 import styled from 'styled-components'
 
-import { getTypes, setSelected as setSelectedType } from '../../state/type'
-import { getColors, setSelected as setSelectedColor } from '../../state/color'
-import { getBrands, setSelected as setSelectedBrand } from '../../state/brand'
+import { getTypes, setSelected as setType, clearSelected as clearType } from '../../state/type'
+import { getColors, setSelected as setColor, clearSelected as clearColor } from '../../state/color'
+import { getBrands, setSelected as setBrand, clearSelected as clearBrand } from '../../state/brand'
 import { clearSelected } from '../../state/store'
 
-import { Select as AntdSelect, Button as AntButton } from 'antd'
+import { Select as AntdSelect, Button } from 'antd'
 
 const { Option } = AntdSelect
 
 const Wrapper = styled.div`
   width: 100%;
-  padding: 16px 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
 `
@@ -31,18 +31,29 @@ const Select = styled(AntdSelect)`
 
 const Label = styled.label`
   color: white;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  font-size: 16px;
+  justify-content: space-between;
+  align-items: flex-end;
   text-transform: capitalize;
 `
 
-const Button = styled(AntButton)`
+const ClearAllButton = styled(Button)`
   margin-top: 16px;
   text-transform: uppercase;
 `
 
-const BasicSelect = ({ options, onChange, value, ...props }) => (
+const BasicSelect = ({ options, onChange, onClear, value, ...props }) => (
   <SelectWrapper>
     <Label htmlFor={props.name}>
-      {props.name}
+      <span>{props.name}</span>
+      {value && (
+        <Button type='primary' size='small' onClick={onClear}>
+          clear
+        </Button>
+      )}
     </Label>
     <Select
       {...props}
@@ -51,7 +62,6 @@ const BasicSelect = ({ options, onChange, value, ...props }) => (
       showSearch
       size='large'
     >
-      <Option className='something' key='none' value={null}>- clear -</Option>
       {options.map(option => (
         <Option key={option} value={option}>{option}</Option>
       ))}
@@ -67,7 +77,8 @@ const colorConnector = connect(
     options: getColors(state)
   }),
   dispatch => ({
-    onChange: (option) => dispatch(setSelectedColor(option))
+    onChange: (option) => dispatch(setColor(option)),
+    onClear: () => dispatch(clearColor())
   })
 )
 
@@ -79,7 +90,8 @@ const typeConnector = connect(
     options: getTypes(state)
   }),
   dispatch => ({
-    onChange: (option) => dispatch(setSelectedType(option))
+    onChange: (option) => dispatch(setType(option)),
+    onClear: () => dispatch(clearType())
   })
 )
 
@@ -91,7 +103,8 @@ const brandConnector = connect(
     options: getBrands(state)
   }),
   dispatch => ({
-    onChange: (option) => dispatch(setSelectedBrand(option))
+    onChange: (option) => dispatch(setBrand(option)),
+    onClear: () => dispatch(clearBrand())
   })
 )
 
@@ -106,9 +119,14 @@ const Filters = ({ dispatch }) => {
       <ColorSelect />
       <BrandSelect />
 
-      <Button size='large' type='primary' icon='delete' onClick={() => dispatch(clearSelected())}>
+      <ClearAllButton
+        size='large'
+        type='primary'
+        icon='delete'
+        onClick={() => dispatch(clearSelected())}
+      >
         Clear all
-      </Button>
+      </ClearAllButton>
     </Wrapper>
   )
 }
