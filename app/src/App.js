@@ -1,24 +1,31 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import 'antd/dist/antd.css'
 import styled from 'styled-components'
+
 import { getList } from './state/list'
-import List from './components/List'
+
+import Header from './components/Header'
+import _List from './components/List'
 import Filters from './components/Filters'
 
 const Main = styled.div`
   text-align: center;
-  background-color: #282c34;
   min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: 'Open sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+`
 
-  & > header {
-    height: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-  }
+const List = styled(_List)`
+  width: 100%;
+  padding: 8px;
+  height: 100vh;
+  padding: 50px 0;
 `
 
 function App ({ dispatch }) {
@@ -28,10 +35,9 @@ function App ({ dispatch }) {
 
   return (
     <Main className='App'>
-      <header role='heading'>
-        The Traffic Meister
+      <Header role='heading'>
         <Filters />
-      </header>
+      </Header>
       <List />
     </Main>
   )
