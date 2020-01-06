@@ -2,12 +2,14 @@ import { createAction, createReducer } from '@reduxjs/toolkit'
 import { setList, getFilteredList } from './list'
 
 export const setSelected = createAction('SET-COLOR')
+export const clearSelected = createAction('CLEAR-COLOR')
 
 const selected = createReducer(
   null,
   {
     [setList.RESET]: () => null,
     [setList.DONE]: () => null,
+    [clearSelected]: () => null,
     [setSelected]: (state, { payload }) => payload
   }
 )

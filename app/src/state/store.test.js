@@ -7,7 +7,7 @@ import {
 } from 'resynchronize'
 
 import { data } from '../service'
-import Store from './store'
+import Store, { clearSelected } from './store'
 import { getList, setList, getFilteredList } from './list'
 import { setSelected as setSelectedBrand, getBrands } from './brand'
 import { setSelected as setSelectedColor, getColors } from './color'
@@ -23,6 +23,11 @@ const fetchDataErroneously = () => new Promise((resolve, reject) => {
   const error = new Error('bad requesst')
   setTimeout(() => reject(error.message), 1)
 })
+
+const ALL_TYPES = 3
+const ALL_ITEMS = 12
+const ALL_BRANDS = 12
+const ALL_COLORS = 8
 
 /**
  * Initial fetch
@@ -47,11 +52,11 @@ describe('When data is fetch', () => {
       // The status is done
       expect(isDone(state.list)).toBeTruthy()
       // The payload is set
-      expect(getPayload(state.list)).toHaveLength(12)
+      expect(getPayload(state.list)).toHaveLength(ALL_ITEMS)
       // The lists are loaded
       expect(getTypes(state)).toHaveLength(3)
       expect(getColors(state)).toHaveLength(8)
-      expect(getBrands(state)).toHaveLength(12)
+      expect(getBrands(state)).toHaveLength(ALL_BRANDS)
       // The selections are reseted
       expect(state.type).toBeFalsy()
       expect(state.color).toBeFalsy()
@@ -108,7 +113,7 @@ describe('When selections is made on', () => {
   })
 
   describe('types the value changes and the lists are filtered  to', () => {
-    test('some values if the type exists', () => {
+    test('some items if the type exists', () => {
       Store.dispatch(setSelectedType('car'))
       const state = Store.getState()
       expect(state.type).toBe('car')
@@ -116,9 +121,10 @@ describe('When selections is made on', () => {
       expect(getFilteredList(state)).toHaveLength(4)
       expect(getBrands(state)).toHaveLength(4)
       expect(getColors(state)).toHaveLength(5)
-      expect(getTypes(state)).toHaveLength(3)
+      expect(getTypes(state)).toHaveLength(ALL_TYPES)
     })
-    test('no values if the type doesnt exists, except the type list (edge case with bad js usage)', () => {
+
+    test('no items if the type doesnt exists, except the type list (edge case with bad js usage)', () => {
       Store.dispatch(setSelectedType('spaceship'))
       const state = Store.getState()
       expect(state.type).toBe('spaceship')
@@ -126,12 +132,12 @@ describe('When selections is made on', () => {
       expect(getFilteredList(state)).toHaveLength(0)
       expect(getBrands(state)).toHaveLength(0)
       expect(getColors(state)).toHaveLength(0)
-      expect(getTypes(state)).toHaveLength(3)
+      expect(getTypes(state)).toHaveLength(ALL_TYPES)
     })
   })
 
   describe('colors the value changes and the lists are filtered to', () => {
-    test('some values if the color exists', () => {
+    test('some items if the color exists', () => {
       Store.dispatch(setSelectedColor('white'))
       const state = Store.getState()
       expect(state.color).toBe('white')
@@ -139,48 +145,49 @@ describe('When selections is made on', () => {
       expect(getFilteredList(state)).toHaveLength(6)
       expect(getBrands(state)).toHaveLength(6)
       expect(getColors(state)).toHaveLength(8)
-      expect(getTypes(state)).toHaveLength(3)
+      expect(getTypes(state)).toHaveLength(ALL_TYPES)
     })
-    test('no values if the color doesnt exists, except the colors list (edge case with bad js usage)', () => {
+
+    test('no items if the color doesnt exists, except the colors list (edge case with bad js usage)', () => {
       Store.dispatch(setSelectedColor('lavender'))
       const state = Store.getState()
       expect(state.color).toBe('lavender')
       // the list is filtered
       expect(getFilteredList(state)).toHaveLength(0)
       expect(getBrands(state)).toHaveLength(0)
-      expect(getColors(state)).toHaveLength(8)
+      expect(getColors(state)).toHaveLength(ALL_COLORS)
       expect(getTypes(state)).toHaveLength(0)
     })
   })
 
   describe('brands value changes and the lists are filtered to', () => {
-    test('some values if the brand exists', () => {
+    test('some items if the brand exists', () => {
       Store.dispatch(setSelectedBrand('Bugatti Veyron'))
       const state = Store.getState()
       expect(state.brand).toBe('Bugatti Veyron')
 
       // the list is filtered
       expect(getFilteredList(state)).toHaveLength(1)
-      expect(getBrands(state)).toHaveLength(12)
+      expect(getBrands(state)).toHaveLength(ALL_BRANDS)
       expect(getColors(state)).toHaveLength(2)
       expect(getTypes(state)).toHaveLength(1)
     })
 
-    test('no values if the brand doesnt exists, except the brands list (edge case with bad js usage)', () => {
+    test('no items if the brand doesnt exists, except the brands list (edge case with bad js usage)', () => {
       Store.dispatch(setSelectedBrand('Renault Veyron'))
       const state = Store.getState()
       expect(state.brand).toBe('Renault Veyron')
 
       // the list is filtered
       expect(getFilteredList(state)).toHaveLength(0)
-      expect(getBrands(state)).toHaveLength(12)
+      expect(getBrands(state)).toHaveLength(ALL_BRANDS)
       expect(getColors(state)).toHaveLength(0)
       expect(getTypes(state)).toHaveLength(0)
     })
   })
 
   describe('different lists the values changes and the list is filtered to', () => {
-    test('some values if the combination values exists', () => {
+    test('some items if the combination values exists', () => {
       Store.dispatch(setSelectedType('car'))
       Store.dispatch(setSelectedColor('black'))
       const state = Store.getState()
@@ -190,16 +197,17 @@ describe('When selections is made on', () => {
       expect(getFilteredList(state)).toHaveLength(2)
       expect(getBrands(state)).toHaveLength(2)
       expect(getColors(state)).toHaveLength(5)
-      expect(getTypes(state)).toHaveLength(3)
+      expect(getTypes(state)).toHaveLength(ALL_TYPES)
     })
 
-    test('one value, except the color that because every item posses at least two', () => {
+    test('one item, except the color that because every item posses at least two', () => {
       Store.dispatch(setSelectedBrand('Porsche Carrera GT'))
       Store.dispatch(setSelectedColor('green'))
       Store.dispatch(setSelectedType('car'))
       const state = Store.getState()
       expect(state.color).toBe('green')
       expect(state.type).toBe('car')
+      expect(state.brand).toBe('Porsche Carrera GT')
       // the list is filtered
       expect(getFilteredList(state)).toHaveLength(1)
       expect(getBrands(state)).toHaveLength(1)
@@ -207,18 +215,38 @@ describe('When selections is made on', () => {
       expect(getTypes(state)).toHaveLength(1)
     })
 
-    test('no values if the combination of values doesnt exists (edge scenario)', () => {
+    test('no items if the combination of values doesnt exists (edge scenario)', () => {
       Store.dispatch(setSelectedBrand('Amer 4-4-0'))
       Store.dispatch(setSelectedColor('gray'))
       Store.dispatch(setSelectedType('car'))
       const state = Store.getState()
       expect(state.color).toBe('gray')
       expect(state.type).toBe('car')
+      expect(state.brand).toBe('Amer 4-4-0')
       // the list is filtered
       expect(getFilteredList(state)).toHaveLength(0)
       expect(getBrands(state)).toHaveLength(0)
       expect(getColors(state)).toHaveLength(0)
       expect(getTypes(state)).toHaveLength(0)
+    })
+
+    test('all the values if the combination of values are cleared', () => {
+      Store.dispatch(setSelectedBrand('Amer 4-4-0'))
+      Store.dispatch(setSelectedColor('gray'))
+      Store.dispatch(setSelectedType('car'))
+      let state = Store.getState()
+      expect(state.color).toBe('gray')
+      expect(state.type).toBe('car')
+      expect(state.brand).toBe('Amer 4-4-0')
+
+      Store.dispatch(clearSelected())
+      state = Store.getState()
+
+      // the values are reset
+      expect(getFilteredList(state)).toHaveLength(ALL_ITEMS)
+      expect(getBrands(state)).toHaveLength(ALL_BRANDS)
+      expect(getColors(state)).toHaveLength(ALL_COLORS)
+      expect(getTypes(state)).toHaveLength(ALL_TYPES)
     })
   })
 })

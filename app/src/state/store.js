@@ -3,10 +3,16 @@ import {
   combineReducers
 } from '@reduxjs/toolkit'
 
-import brand from './brand'
-import color from './color'
-import typeReducer from './type'
+import brand, { clearSelected as clearBrand } from './brand'
+import color, { clearSelected as clearColor } from './color'
+import typeReducer, { clearSelected as clearType } from './type'
 import list from './list'
+
+export const clearSelected = () => dispatch => {
+  dispatch(clearBrand())
+  dispatch(clearColor())
+  dispatch(clearType())
+}
 
 const store = configureStore({
   reducer: combineReducers({
