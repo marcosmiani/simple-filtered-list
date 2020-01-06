@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const ItemWrapper = styled.div`
   width: auto;
-  height: 200px;
+  height: 220px;
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -13,8 +13,7 @@ const ItemWrapper = styled.div`
   color: white;
   background-color: #282c34;
   margin: 8px;
-  border-radius: 4px;
-  border: 1px lightgray solid;
+  border-radius: 2px;
 
   @media (min-width: 800px) {
     height: 200px;
@@ -28,14 +27,16 @@ const Img = styled.img`
 `
 
 const Brand = styled.div`
-  width: auto;
+  width: 100%;
   background-color: white;
   color: gray;
-  border-radius: 2px;
+  border-radius: 0;
   position: absolute;
   padding: 4px;
-  bottom: 16px;
-  right: 16px;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
 `
 
 const Colors = styled.div`
@@ -45,12 +46,12 @@ const Colors = styled.div`
 `
 
 const Color = styled.div`
-  width: 10px;
-  height: 10px;
+  width: 14px;
+  height: 14px;
   background-color: ${({ color }) => color};
-  border-radius: 5px;
+  border-radius: 7px;
   margin: 4px;
-  border: 1px ${({ color }) => color === 'white' ? 'black' : color} solid;
+  border: 1px ${({ color }) => color === 'white' ? 'gray' : color} solid;
 `
 
 export const Item = ({ id, img, brand, colors }) => {

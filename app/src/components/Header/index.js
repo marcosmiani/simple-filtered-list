@@ -19,12 +19,21 @@ const Drawer = styled(AntDrawer)`
   }
 `
 
-const Button = styled(AntButton)`
+const OpenButton = styled(AntButton)`
   position: fixed;
   top: 8px;
   left: 8px;
   color: white;
   z-index: 1;
+`
+
+const CloseButton = styled(AntButton)`
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  color: white;
+  z-index: 1001;
+  color: black;
 `
 
 const connector = connect(
@@ -38,11 +47,16 @@ export default connector(({ children, count, ...props }) => {
 
   return (
     <Header {...props}>
-      <Button type='primary' size='large' shape='circle' onClick={() => setDrawer(true)}>
+      <OpenButton type='primary' size='large' shape='circle' onClick={() => setDrawer(true)}>
         <Badge count={count} offset={[8, -4]}>
           <Icon type='filter' />
         </Badge>
-      </Button>
+      </OpenButton>
+      {drawer && (
+        <CloseButton type='default' size='large' shape='circle' onClick={() => setDrawer(false)}>
+          <Icon type='close' />
+        </CloseButton>
+      )}
       <Drawer
         placement='left'
         closable={false}
