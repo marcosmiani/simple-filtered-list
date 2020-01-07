@@ -57,7 +57,7 @@ const Color = styled.div`
 export const Item = ({ id, img, brand, colors }) => {
   const [image, setImage] = useState(true)
   return (
-    <ItemWrapper>
+    <ItemWrapper role='listitem'>
       {image && (
         <Img
           alt={`${id}`}

@@ -24,6 +24,7 @@ const EventWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 `
 
 const connector = connect(
@@ -33,23 +34,24 @@ const connector = connect(
   })
 )
 
-export const List = ({ items = [], listStatus, dispatch, ...props }) => {
-  const { loading, error } = listStatus
+export const List = ({ items = [], listStatus = {}, dispatch = () => {}, ...props }) => {
+  const { loading = true, error = null } = listStatus
+
   return (
-    <ListWrapper {...props}>
+    <ListWrapper role='list' {...props}>
       {!loading && items.map(item => (
         <Item key={item.id} {...item} />
       ))}
       {error && (
-        <EventWrapper>
+        <EventWrapper role='alert' title='error'>
           {error}
-          <Button type='primary' shape='circle' onClick={() => dispatch(getList())}>
+          <Button type='primary' shape='circle' title='Reload' onClick={() => dispatch(getList())}>
             <Icon type='rollback' />
           </Button>
         </EventWrapper>
       )}
       {loading && (
-        <EventWrapper>
+        <EventWrapper title='loading'>
           <Icon type='loading' style={{ fontSize: '40px' }} />
         </EventWrapper>
       )}

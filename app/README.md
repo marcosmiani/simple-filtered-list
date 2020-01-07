@@ -1,5 +1,20 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# The Traffic Meister
+
+This example of app allows you to filter a dynamic list of items using the item properties.
+To build it I started with the basic Create React App boilerplate and added some components to the mix:
+- `Redux`: a meaninful state
+- `Resynchronize`: add asynchronous handling to the redux store
+- `React-redux`: connects the state to react
+- `@testing-library/react` && cia: test react and redux with ease
+- `antd` or ant-design: simple collection of components to build a fast and realiable set of features on top
+- `styled-components`: apply custom styles to any component that needs it whitout to worry about anything else except making useful components.
+
+To complement the structure a set of tests were built along. The selection of what to test and what to just simply avoid, was made with the idea of preventing the common mistakes and not fall on irrelevant tests, I hope I didnt forget any important one!
+
+As it can be seen on the commits, I didnt expend all the 16hs on it, I couldnt find that kind of time to invest on the excercise but I enjoy it nonetheless.
+
 ## Available Scripts
 
 In the project directory, you can run:
