@@ -1,5 +1,16 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
+
+const appear = keyframes`
+  0% {
+    filter: blur(8px);
+    opacity: 0;
+  }
+  100% {
+    filter: none;
+    opacity: 1;
+  }
+`
 
 const ItemWrapper = styled.div`
   width: auto;
@@ -11,9 +22,10 @@ const ItemWrapper = styled.div`
   align-items: center;
   justify-content: center;
   color: white;
-  background-color: #282c34;
-  margin: 8px;
+  background-color: #505867;
+  margin: 16px;
   border-radius: 2px;
+  animation: 1s ${appear};
 
   @media (min-width: 800px) {
     height: 200px;
@@ -28,8 +40,8 @@ const Img = styled.img`
 
 const Brand = styled.div`
   width: 100%;
-  background-color: white;
-  color: gray;
+  background-color: rgba(80, 88, 103, 0.9);
+  color: white;
   border-radius: 0;
   position: absolute;
   padding: 4px;
@@ -40,7 +52,6 @@ const Brand = styled.div`
 `
 
 const Colors = styled.div`
-  background-color: white;
   display: inline-flex;
   flex-direction: row;
 `

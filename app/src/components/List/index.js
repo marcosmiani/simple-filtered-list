@@ -20,7 +20,7 @@ const ListWrapper = styled.div`
 const EventWrapper = styled.div`
   width: 100%;
   height: 100px;
-  color: black;
+  color: white;
   display: flex;
   flex-direction: column;
   align-items: center;

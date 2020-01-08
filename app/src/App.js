@@ -8,6 +8,7 @@ import { getList } from './state/list'
 import Header from './components/Header'
 import _List from './components/List'
 import Filters from './components/Filters'
+import Logo from './components/Logo'
 
 const Main = styled.div`
   text-align: center;
@@ -19,6 +20,7 @@ const Main = styled.div`
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #282c34;
 `
 
 const List = styled(_List)`
@@ -35,6 +37,7 @@ function App ({ dispatch }) {
 
   return (
     <Main className='App'>
+      <Logo />
       <Header role='heading'>
         <Filters />
       </Header>
