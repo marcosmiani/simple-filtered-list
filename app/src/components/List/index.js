@@ -23,6 +23,11 @@ const EventWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-size: 16px;
+
+  & button {
+    margin: 8px;
+  }
 `
 
 const connector = connect(
@@ -43,7 +48,7 @@ export const List = ({ items = [], listStatus = {}, dispatch = () => {}, ...prop
       {error && (
         <EventWrapper role='alert' title='error'>
           {error}
-          <Button type='primary' shape='circle' title='Reload' onClick={() => dispatch(getList())}>
+          <Button type='primary' size='large' shape='circle' title='Reload' onClick={() => dispatch(getList())}>
             <Icon type='rollback' />
           </Button>
         </EventWrapper>
