@@ -8,9 +8,7 @@ import { Button, Icon } from 'antd'
 import Item from './Item'
 
 const ListWrapper = styled.div`
-  max-height: 100vh;
   max-width: 100vw;
-  overflow-y: auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

@@ -24,7 +24,7 @@ const ItemWrapper = styled.div`
   color: white;
   background-color: #505867;
   margin: 16px;
-  border-radius: 2px;
+  border-radius: 3px;
   animation: 1s ${appear};
 
   @media (min-width: 800px) {
@@ -44,11 +44,12 @@ const Brand = styled.div`
   color: white;
   border-radius: 0;
   position: absolute;
-  padding: 4px;
+  padding: 8px;
   bottom: 0;
   right: 0;
   display: flex;
   justify-content: space-between;
+  font-weight: bold;
 `
 
 const Colors = styled.div`

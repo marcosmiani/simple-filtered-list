@@ -25,8 +25,6 @@ const Main = styled.div`
 
 const List = styled(_List)`
   width: 100%;
-  padding: 8px;
-  max-height: 100vh;
   padding: 50px 0;
 `
 
