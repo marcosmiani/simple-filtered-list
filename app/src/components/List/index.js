@@ -38,7 +38,7 @@ const connector = connect(
 )
 
 export const List = ({ items = [], listStatus = {}, dispatch = () => {}, ...props }) => {
-  const { loading = true, error = null } = listStatus
+  const { status: { loading = true } = {}, error = null } = listStatus
 
   return (
     <ListWrapper role='list' {...props}>

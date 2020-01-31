@@ -66,7 +66,7 @@ describe('When data is fetch', () => {
   })
 
   test('reseted', () => {
-    Store.dispatch(setList.RESET())
+    Store.dispatch(setList.reset())
     const state = Store.getState()
     expect(isLoading(state.list)).toBeFalsy()
     expect(isDone(state.list)).toBeFalsy()
@@ -109,7 +109,7 @@ describe('When data is fetch', () => {
 
 describe('When selections is made on', () => {
   beforeEach(() => {
-    Store.dispatch(setList.DONE(data))
+    Store.dispatch(setList.done(data))
   })
 
   describe('types the value changes and the lists are filtered  to', () => {

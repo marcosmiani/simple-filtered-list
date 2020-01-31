@@ -78,7 +78,14 @@ describe('When has items', () => {
   let renderedList = null
 
   beforeEach(() => {
-    renderedList = render(<List listStatus={{ loading: false, error: false }} items={data} />)
+    renderedList = render(
+      <List
+        listStatus={{
+          status: { loading: false, error: false }
+        }}
+        items={data}
+      />
+    )
   })
 
   afterEach(() => {

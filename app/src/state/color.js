@@ -7,8 +7,8 @@ export const clearSelected = createAction('CLEAR-COLOR')
 const selected = createReducer(
   null,
   {
-    [setList.RESET]: () => null,
-    [setList.DONE]: () => null,
+    [setList.reset]: () => null,
+    [setList.done]: () => null,
     [clearSelected]: () => null,
     [setSelected]: (state, { payload }) => payload
   }

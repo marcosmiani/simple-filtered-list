@@ -31,10 +31,10 @@ const fetchData = () => new Promise((resolve, reject) => {
  * @param {Function} fetcher Fetcher function: it should return a promise when called
  */
 export const getList = (fetcher = fetchData) => (dispatch) => {
-  dispatch(setList.START())
+  dispatch(setList.start())
   return fetcher()
-    .then(data => dispatch(setList.DONE(data)))
-    .catch(ex => dispatch(setList.ERROR(ex)))
+    .then(data => dispatch(setList.done(data)))
+    .catch(ex => dispatch(setList.error(ex)))
 }
 
 /**
@@ -54,4 +54,4 @@ export const getFilteredList = (state, skipOptions = {}) => {
   )
 }
 
-export default createAsyncReducer(setList, { reset: () => null })
+export default createAsyncReducer([], { [setList]: { reset: () => null } })
